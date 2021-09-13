@@ -108,21 +108,32 @@ const itemRef = document.querySelector('.gallery__item')
 const linkRef = document.querySelector('.gallery__link')
 const modalBoxRef = document.querySelector('.lightbox')
 const modalLightBoxContent = document.querySelector('.lightbox__content')
+const lightboxContentImgRef = document.querySelector('.lightbox__image')
+const closeModalBtn = document.querySelector('.lightbox__button')
 console.log(listRef)
 listRef.insertAdjacentHTML('beforeend', makeImageGalleryRows) 
 
 
 listRef.addEventListener('click', onOpenModal)
 
+closeModalBtn.addEventListener('click', onCloseModal)
+
 function onOpenModal(event) {
 event.preventDefault();
   modalBoxRef.classList.add('is-open')
   const targEl = event.target
   console.log(targEl)
-  //  console.log(targEl.value[src])
+  
+  const chahgSrc = targEl.dataset.source
+  const chahgAlt = targEl.alt
+  console.log(chahgSrc)
+  console.log(chahgAlt)
+  lightboxContentImgRef.setAttribute('scr', chahgSrc)
+  lightboxContentImgRef.setAttribute('alt', chahgAlt)
+  
 }
 
 
 function onCloseModal() {
-  
+    modalBoxRef.classList.remove('is-open')
 }
