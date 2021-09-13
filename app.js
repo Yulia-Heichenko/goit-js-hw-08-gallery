@@ -128,6 +128,7 @@ event.preventDefault();
   const chahgAlt = targEl.alt
   console.log(chahgSrc)
   console.log(chahgAlt)
+  
   lightboxContentImgRef.setAttribute('scr', chahgSrc)
   lightboxContentImgRef.setAttribute('alt', chahgAlt)
   
