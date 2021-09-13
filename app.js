@@ -110,31 +110,57 @@ const modalBoxRef = document.querySelector('.lightbox')
 const modalLightBoxContent = document.querySelector('.lightbox__content')
 const lightboxContentImgRef = document.querySelector('.lightbox__image')
 const closeModalBtn = document.querySelector('.lightbox__button')
-console.log(listRef)
-listRef.insertAdjacentHTML('beforeend', makeImageGalleryRows) 
+const overlauRef = document.querySelector('.lightbox__overlay')
 
+listRef.insertAdjacentHTML('beforeend', makeImageGalleryRows) 
 
 listRef.addEventListener('click', onOpenModal)
 
 closeModalBtn.addEventListener('click', onCloseModal)
 
+overlauRef.addEventListener('click', onOverlayClick)
+
+window.addEventListener('keydown', onKeyPress)
+
 function onOpenModal(event) {
-event.preventDefault();
+  window.addEventListener('keydown', onKeyPress)
+  event.preventDefault();
   modalBoxRef.classList.add('is-open')
   const targEl = event.target
-  console.log(targEl)
   
   const chahgSrc = targEl.dataset.source
   const chahgAlt = targEl.alt
-  console.log(chahgSrc)
-  console.log(chahgAlt)
-  
-  lightboxContentImgRef.setAttribute('scr', chahgSrc)
-  lightboxContentImgRef.setAttribute('alt', chahgAlt)
-  
-}
 
+  lightboxContentImgRef.src = [chahgSrc]
+  console.log(lightboxContentImgRef.src)
+}
 
 function onCloseModal() {
-    modalBoxRef.classList.remove('is-open')
+  window.removeEventListener('keydown', onKeyPress)
+  modalBoxRef.classList.remove('is-open')
+  
+  lightboxContentImgRef.removeAttribute('src')
 }
+
+function onOverlayClick(event) {
+  console.log(event.currentTarget)
+  console.log(event.target)
+  if (event.currentTarget === event.target) {
+    onCloseModal()
+  }
+}
+
+function onKeyPress(event) {
+  console.log(event)
+  // if (event.code === 'ArrowRight') {
+    
+  // }
+  // onFlipsKeys()
+  if (event.code === 'Escape') {
+    onCloseModal()
+  }
+}
+
+// function onFlipsKeys(event) {
+//   console.log(event)
+// }
