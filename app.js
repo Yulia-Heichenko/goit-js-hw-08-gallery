@@ -118,49 +118,48 @@ listRef.addEventListener('click', onOpenModal)
 
 closeModalBtn.addEventListener('click', onCloseModal)
 
-overlauRef.addEventListener('click', onOverlayClick)
-
-window.addEventListener('keydown', onKeyPress)
+overlauRef.addEventListener('click', onCloseModal)
 
 function onOpenModal(event) {
+
   window.addEventListener('keydown', onKeyPress)
   event.preventDefault();
+
+  if (event.target.nodeName !== 'IMG') {
+    return
+  }
+
   modalBoxRef.classList.add('is-open')
   const targEl = event.target
+  console.log(targEl)
+  console.log(event.target.nodeName)
   
   const chahgSrc = targEl.dataset.source
-  const chahgAlt = targEl.alt
-
+  // const chahgAlt = targEl.alt
+ 
   lightboxContentImgRef.src = [chahgSrc]
   console.log(lightboxContentImgRef.src)
 }
 
-function onCloseModal() {
+
+function onCloseModal(event) {
+
   window.removeEventListener('keydown', onKeyPress)
+
   modalBoxRef.classList.remove('is-open')
   
   lightboxContentImgRef.removeAttribute('src')
-}
 
-function onOverlayClick(event) {
-  console.log(event.currentTarget)
-  console.log(event.target)
   if (event.currentTarget === event.target) {
-    onCloseModal()
+    modalBoxRef.classList.remove('is-open')
   }
 }
 
+
 function onKeyPress(event) {
-  console.log(event)
-  // if (event.code === 'ArrowRight') {
-    
-  // }
-  // onFlipsKeys()
+  
   if (event.code === 'Escape') {
     onCloseModal()
   }
 }
 
-// function onFlipsKeys(event) {
-//   console.log(event)
-// }
